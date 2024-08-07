@@ -28,7 +28,6 @@ namespace reportesApi.Models
         public string ApPaterno { get; set; }
         public string ApMaterno { get; set; }
         public string Direccion { get; set; }
-        public string Estatus { get; set; }
     }
 
 }

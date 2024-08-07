@@ -86,7 +86,7 @@ namespace reportesApi.Controllers
                 objectResponse.message = ex.Message;
             }
 
-            return new JsonResult(resultado);
+            return new JsonResult(objectResponse);
         }
 
         [HttpPut("UpdateAlumno")]
@@ -111,8 +111,8 @@ namespace reportesApi.Controllers
             return new JsonResult(objectResponse);
         }
 
-        [HttpDelete("DeleteAlumno")]
-        public IActionResult DeleteAlumno([FromBody] int id )
+        [HttpDelete("DeleteAlumno/{id}")]
+        public IActionResult DeleteAlumno([FromRoute] int id )
         {
             var objectResponse = Helper.GetStructResponse();
             try

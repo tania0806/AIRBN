@@ -23,7 +23,6 @@ namespace reportesApi.Models
         public int Id { get; set;}
         public string NombreCarrera{ get; set; }
         public string Abreviatura { get; set; }
-        public string Estatus { get; set; }
 
     }
 

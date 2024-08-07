@@ -29,7 +29,6 @@ namespace reportesApi.Models
         public string ClaveMateria{ get; set; }
 
         public int IdCarrera { get; set; }
-        public string Estatus { get; set; }
 
     }
 

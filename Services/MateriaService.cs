@@ -96,7 +96,6 @@ namespace reportesApi.Services
             parametros.Add(new SqlParameter { ParameterName = "@pNombreMateria", SqlDbType = System.Data.SqlDbType.VarChar, Value = Materia.NombreMateria });
             parametros.Add(new SqlParameter { ParameterName = "@pClaveMateria", SqlDbType = System.Data.SqlDbType.VarChar, Value = Materia.ClaveMateria });
             parametros.Add(new SqlParameter { ParameterName = "@pIdCarrera", SqlDbType = System.Data.SqlDbType.VarChar, Value = Materia.IdCarrera });
-            parametros.Add(new SqlParameter { ParameterName = "@pEstatus", SqlDbType = System.Data.SqlDbType.VarChar, Value = Materia.Estatus.ToLower() == "activo" ? 1 : 0});
             parametros.Add(new SqlParameter { ParameterName = "@pUsuarioRegistra", SqlDbType = System.Data.SqlDbType.Int, Value = 1});
 
             try
