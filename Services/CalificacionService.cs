@@ -103,7 +103,6 @@ namespace reportesApi.Services
             parametros.Add(new SqlParameter { ParameterName = "@pPeriodo", SqlDbType = System.Data.SqlDbType.Int, Value = Calificacion.Periodo});
             parametros.Add(new SqlParameter { ParameterName = "@pParcial", SqlDbType = System.Data.SqlDbType.Int, Value = Calificacion.Parcial});
             parametros.Add(new SqlParameter { ParameterName = "@pCalificacion", SqlDbType = System.Data.SqlDbType.Float, Value = Calificacion.Calificacion});
-            parametros.Add(new SqlParameter { ParameterName = "@pEstatus", SqlDbType = System.Data.SqlDbType.VarChar, Value = Calificacion.Estatus.ToLower() == "activo" ? 1 : 0});
             parametros.Add(new SqlParameter { ParameterName = "@pUsuarioRegistra", SqlDbType = System.Data.SqlDbType.Int, Value = 1 });
 
             try

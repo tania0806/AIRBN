@@ -32,7 +32,6 @@ namespace reportesApi.Models
         public int Periodo { get; set; }
         public int Parcial { get; set; }
         public float Calificacion { get; set; }
-        public string Estatus { get; set; }
     }
 
 }

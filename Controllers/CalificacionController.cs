@@ -110,8 +110,8 @@ namespace reportesApi.Controllers
             return new JsonResult(objectResponse);
         }
 
-        [HttpDelete("DeleteCalificacion")]
-        public IActionResult DeleteCalificacion([FromBody] int id )
+        [HttpDelete("DeleteCalificacion/{id}")]
+        public IActionResult DeleteCalificacion([FromRoute] int id )
         {
             var objectResponse = Helper.GetStructResponse();
             try
