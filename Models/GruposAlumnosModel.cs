@@ -24,7 +24,6 @@ namespace reportesApi.Models
         public int Id { get; set; }
         public int IdGrupo{ get; set; }
         public string Matricula { get; set; }
-        public string Estatus { get; set; }
     }
 
 }

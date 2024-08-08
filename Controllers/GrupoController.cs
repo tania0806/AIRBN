@@ -110,8 +110,8 @@ namespace reportesApi.Controllers
             return new JsonResult(objectResponse);
         }
 
-        [HttpDelete("DeleteGrupo")]
-        public IActionResult DeleteGrupo([FromBody] int id )
+        [HttpDelete("DeleteGrupo/{id}")]
+        public IActionResult DeleteGrupo([FromRoute] int id )
         {
             var objectResponse = Helper.GetStructResponse();
             try

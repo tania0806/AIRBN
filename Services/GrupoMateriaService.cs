@@ -15,14 +15,14 @@ using System.Linq;
 using System.Text;
 namespace reportesApi.Services
 {
-    public class GrupoService
+    public class GrupoMateriaService
     {
         private  string connection;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private ArrayList parametros = new ArrayList();
 
 
-        public GrupoService(IMarcatelDatabaseSetting settings, IWebHostEnvironment webHostEnvironment)
+        public GrupoMateriaService(IMarcatelDatabaseSetting settings, IWebHostEnvironment webHostEnvironment)
         {
              connection = settings.ConnectionString;
 
@@ -30,24 +30,25 @@ namespace reportesApi.Services
              
         }
 
-        public List<GetGrupoModel> GetGrupos()
+        public List<GetGrupoMateriaModel> GetGrupoMateria()
         {
             ConexionDataAccess dac = new ConexionDataAccess(connection);
-            GetGrupoModel persona = new GetGrupoModel();
+            GetGrupoMateriaModel persona = new GetGrupoMateriaModel();
 
-            List<GetGrupoModel> lista = new List<GetGrupoModel>();
+            List<GetGrupoMateriaModel> lista = new List<GetGrupoMateriaModel>();
             try
             {
                 parametros = new ArrayList();
-                DataSet ds = dac.Fill("sp_get_grupos", parametros);
+                DataSet ds = dac.Fill("sp_get_grupomaterias", parametros);
                 if (ds.Tables[0].Rows.Count > 0)
                 {
 
                   lista = ds.Tables[0].AsEnumerable()
-                    .Select(dataRow => new GetGrupoModel {
-                        Id = int.Parse(dataRow["Id"].ToString()),
-                        Nombre = dataRow["Nombre"].ToString(),
-                        Clave = dataRow["Clave"].ToString(),
+                    .Select(dataRow => new GetGrupoMateriaModel {
+                        Id = int.Parse(dataRow["id"].ToString()),
+                        Grupo = dataRow["Clave"].ToString(),
+                        Materia = dataRow["NombreMateria"].ToString(),
+                        Carrera = dataRow["NombreCarrera"].ToString(),
                         Estatus = dataRow["Estatus"].ToString(),
                         UsuarioRegistra = dataRow["UsuarioRegistra"].ToString(),
                         FechaRegistro= dataRow["FechaRegistro"].ToString()
@@ -61,19 +62,19 @@ namespace reportesApi.Services
             return lista;
         }
 
-        public string InsertGrupo(InsertGrupoModel Grupo)
+        public string InsertGrupoMateria(InsertGrupoMateriaModel GrupoMateria)
         {
             ConexionDataAccess dac = new ConexionDataAccess(connection);
             parametros = new ArrayList();
             string mensaje;
 
-            parametros.Add(new SqlParameter { ParameterName = "@pNombre", SqlDbType = System.Data.SqlDbType.VarChar, Value = Grupo.Nombre });
-            parametros.Add(new SqlParameter { ParameterName = "@pClave", SqlDbType = System.Data.SqlDbType.VarChar, Value = Grupo.Clave});
-            parametros.Add(new SqlParameter { ParameterName = "@pUsuarioRegistra", SqlDbType = System.Data.SqlDbType.Int, Value = 1 });
+            parametros.Add(new SqlParameter { ParameterName = "@pIdGrupo", SqlDbType = System.Data.SqlDbType.Int, Value = GrupoMateria.IdGrupo });
+            parametros.Add(new SqlParameter { ParameterName = "@pIdMateria", SqlDbType = System.Data.SqlDbType.Int, Value = GrupoMateria.IdMateria});
+            parametros.Add(new SqlParameter { ParameterName = "@pUsuario", SqlDbType = System.Data.SqlDbType.Int, Value = 1 });
 
             try
             {
-                DataSet ds = dac.Fill("sp_insert_grupo", parametros);
+                DataSet ds = dac.Fill("sp_insert_grupomaterias", parametros);
                 mensaje = ds.Tables[0].AsEnumerable().Select(dataRow => dataRow["mensaje"].ToString()).ToList()[0];
             }
             catch (Exception ex)
@@ -83,21 +84,21 @@ namespace reportesApi.Services
             return mensaje;
         }
 
-        public string UpdateGrupo(UpdateGrupoModel Grupo)
+        public string UpdateGrupoMateria(UpdateGrupoMateriaModel GrupoMateria)
         {
             ConexionDataAccess dac = new ConexionDataAccess(connection);
             parametros = new ArrayList();
             string mensaje;
 
 
-            parametros.Add(new SqlParameter { ParameterName = "@pId", SqlDbType = System.Data.SqlDbType.VarChar, Value = Grupo.Id });
-            parametros.Add(new SqlParameter { ParameterName = "@pNombre", SqlDbType = System.Data.SqlDbType.VarChar, Value = Grupo.Nombre });
-            parametros.Add(new SqlParameter { ParameterName = "@pClave", SqlDbType = System.Data.SqlDbType.VarChar, Value = Grupo.Clave });
-            parametros.Add(new SqlParameter { ParameterName = "@pUsuarioRegistra", SqlDbType = System.Data.SqlDbType.Int, Value = 1});
+            parametros.Add(new SqlParameter { ParameterName = "@pId", SqlDbType = System.Data.SqlDbType.Int, Value = GrupoMateria.Id });
+            parametros.Add(new SqlParameter { ParameterName = "@pIdGrupo", SqlDbType = System.Data.SqlDbType.Int, Value = GrupoMateria.IdGrupo });
+            parametros.Add(new SqlParameter { ParameterName = "@pIdMateria", SqlDbType = System.Data.SqlDbType.Int, Value = GrupoMateria.IdMateria});
+            parametros.Add(new SqlParameter { ParameterName = "@pUsuario", SqlDbType = System.Data.SqlDbType.Int, Value = 1});
 
             try
             {
-                DataSet ds = dac.Fill("sp_update_grupos", parametros);
+                DataSet ds = dac.Fill("sp_update_grupomaterias", parametros);
                 mensaje = ds.Tables[0].AsEnumerable().Select(dataRow => dataRow["mensaje"].ToString()).ToList()[0];
             }
             catch (Exception ex)
@@ -108,7 +109,7 @@ namespace reportesApi.Services
             return mensaje;
         }
 
-        public void DeleteGrupo(int id)
+        public void DeleteGrupoMateria(int id)
         {
             ConexionDataAccess dac = new ConexionDataAccess(connection);
             parametros = new ArrayList();
@@ -118,7 +119,7 @@ namespace reportesApi.Services
 
             try
             {
-                dac.ExecuteNonQuery("sp_delete_Grupos", parametros);
+                dac.ExecuteNonQuery("sp_delete_grupomaterias", parametros);
             }
             catch (Exception ex)
             {

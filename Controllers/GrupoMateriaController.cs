@@ -18,11 +18,11 @@ namespace reportesApi.Controllers
 {
    
     [Route("api")]
-    public class GrupoAlumnoController: ControllerBase
+    public class GrupoMateriaController: ControllerBase
     {
    
-        private readonly GrupoAlumnoService _GrupoAlumnoService;
-        private readonly ILogger<GrupoAlumnoController> _logger;
+        private readonly GrupoMateriaService _GrupoMateriaService;
+        private readonly ILogger<GrupoMateriaController> _logger;
   
         private readonly IJwtAuthenticationService _authService;
         private readonly IWebHostEnvironment _hostingEnvironment;
@@ -30,8 +30,8 @@ namespace reportesApi.Controllers
 
         Encrypt enc = new Encrypt();
 
-        public GrupoAlumnoController(GrupoAlumnoService GrupoAlumnoService, ILogger<GrupoAlumnoController> logger, IJwtAuthenticationService authService) {
-            _GrupoAlumnoService = GrupoAlumnoService;
+        public GrupoMateriaController(GrupoMateriaService GrupoMateriaService, ILogger<GrupoMateriaController> logger, IJwtAuthenticationService authService) {
+            _GrupoMateriaService = GrupoMateriaService;
             _logger = logger;
        
             _authService = authService;
@@ -43,15 +43,15 @@ namespace reportesApi.Controllers
         }
 
 
-        [HttpPost("InsertGrupoAlumno")]
-        public IActionResult InsertGrupoAlumno([FromBody] InsertGrupoAlumnoModel req )
+        [HttpPost("InsertGrupoMateria")]
+        public IActionResult InsertGrupoMateria([FromBody] InsertGrupoMateriaModel req )
         {
             var objectResponse = Helper.GetStructResponse();
             try
             {
                 objectResponse.StatusCode = (int)HttpStatusCode.OK;
                 objectResponse.success = true;
-                objectResponse.message = _GrupoAlumnoService.InsertGrupoAlumno(req);
+                objectResponse.message = _GrupoMateriaService.InsertGrupoMateria(req);
 
             }
 
@@ -63,8 +63,8 @@ namespace reportesApi.Controllers
             return new JsonResult(objectResponse);
         }
 
-        [HttpGet("GetGruposAlumnos")]
-        public IActionResult GetGruposAlumnos()
+        [HttpGet("GetGruposMaterias")]
+        public IActionResult GetGruposMaterias()
         {
             var objectResponse = Helper.GetStructResponse();
             try
@@ -76,7 +76,7 @@ namespace reportesApi.Controllers
 
                 // Llamando a la función y recibiendo los dos valores.
                 
-                 var resultado = _GrupoAlumnoService.GetGrupoAlumno();
+                 var resultado = _GrupoMateriaService.GetGrupoMateria();
                  objectResponse.response = resultado;
             }
 
@@ -88,15 +88,15 @@ namespace reportesApi.Controllers
             return new JsonResult(objectResponse);
         }
 
-        [HttpPut("UpdateGruposAlumnos")]
-        public IActionResult UpdateGruposAlumnos([FromBody] UpdateGrupoAlumnoModel req )
+        [HttpPut("UpdateGrupoMateria")]
+        public IActionResult UpdateGruposMaterias([FromBody] UpdateGrupoMateriaModel req )
         {
             var objectResponse = Helper.GetStructResponse();
             try
             {
                 objectResponse.StatusCode = (int)HttpStatusCode.OK;
                 objectResponse.success = true;
-                objectResponse.message = _GrupoAlumnoService.UpdateGrupoAlumno(req);
+                objectResponse.message = _GrupoMateriaService.UpdateGrupoMateria(req);
 
                 ;
 
@@ -110,8 +110,8 @@ namespace reportesApi.Controllers
             return new JsonResult(objectResponse);
         }
 
-        [HttpDelete("DeleteGrupoAlumno/{id}")]
-        public IActionResult DeleteGrupoAlumno([FromRoute] int id )
+        [HttpDelete("DeleteGrupoMateria/{id}")]
+        public IActionResult DeleteGrupoMateria([FromRoute] int id )
         {
             var objectResponse = Helper.GetStructResponse();
             try
@@ -120,7 +120,7 @@ namespace reportesApi.Controllers
                 objectResponse.success = true;
                 objectResponse.message = "data cargado con exito";
 
-                _GrupoAlumnoService.DeleteGrupoAlumno(id);
+                _GrupoMateriaService.DeleteGrupoMateria(id);
 
             }
 
