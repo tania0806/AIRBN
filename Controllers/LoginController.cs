@@ -30,36 +30,34 @@ namespace reportesApi.Controllers
 
         [AllowAnonymous]
         [HttpPost("SignIn")]
-        public JsonResult SignIn([FromBody] AuthInfo user)
+        public JsonResult SignIn([FromBody] InsertUser user)
         {
             ResponseLogin result = new ResponseLogin();
-            result.Response = new ResponseBody();
-            result.Response.data = new DataResponseLogin();
-            result.Response.data.Usuario = new UsuarioModel();
+            result.response = new ResponseBody();
+            result.response.data = new DataResponseLogin();
+            result.response.data.Usuario = new UsuarioModel();
           
                 string cryptedPass = enc.GetSHA256(user.Userpassword);
            
             var loginResponse = _loginService.Login(user.Username, user.Userpassword);
-
+            
          
            
                 if (loginResponse.Id != 0)
                 {
                     result.StatusCode = (int)HttpStatusCode.OK;
-                    result.Error = false;
-                    result.Success = true;
-                    result.Message = "Bienvenido";
-                    result.Response.data.Usuario = loginResponse;
-                    result.Response.data.Status = true;
-                    result.Response.data.Mensaje = "Bienvenido";
+                    result.succes = true;
+                    result.message = "Bienvenido";
+                    result.response.data.Usuario = loginResponse;
+                    result.response.data.Status = true;
+                    result.response.data.Mensaje = "Bienvenido";
                     var token = _authService.Authenticate(user.Username, cryptedPass);
-                    result.Response.data.Token = token;
+                    result.response.data.Token = token;
                 }
                 else
                 {
-                    result.Error = true;
-                    result.Success = false;
-                    result.Message = "Usuario o contraseña incorrecto,";
+                    result.succes = false;
+                    result.message = "Usuario o contraseña incorrecto,";
 
                 }
 

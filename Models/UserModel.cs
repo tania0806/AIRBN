@@ -4,10 +4,9 @@ using System;
 public class ResponseLogin
 {
     public int StatusCode { get; set; }
-    public bool Success { get; set; }
-    public bool Error { get; set; }
-    public string Message { get; set; }
-    public ResponseBody Response { get; set; }
+    public bool succes { get; set; }
+    public string message { get; set; }
+    public ResponseBody response { get; set; }
 
 
 }
@@ -42,7 +41,4 @@ public class UsuarioModel
         public int Id { get; set; }
         public string NombreUsuario { get; set; }
         public string NombrePersona { get; set; }
-        public int IdSucursal { get; set; }        
-        public string NombreSucursal { get; set; }
-        public int IdPerfil { get; set; }
     }
