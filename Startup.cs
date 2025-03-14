@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using reportesApi.Extensions;
-using reportesApi.Models;
-using reportesApi.Services;
+using Airbnb.Models;
+using Airbnb.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -19,7 +19,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace reportesApi
+namespace Airbnb
 {
     public class Startup
     {
@@ -61,17 +61,17 @@ namespace reportesApi
 
             // Get Services LB
             services.AddSingleton<LoginService>();
-            services.AddSingleton<FuncionesExtraService>();
-            services.AddSingleton<ComprasService>();
-            services.AddSingleton<PersonaService>();
-            services.AddSingleton<CarreraService>();
-            services.AddSingleton<MateriaService>();
-            services.AddSingleton<AlumnoService>();
-            services.AddSingleton<CalificacionService>();
-            services.AddSingleton<ProfesorService>();
-            services.AddSingleton<GrupoService>();
-            services.AddSingleton<GrupoAlumnoService>();
-            services.AddSingleton<MateriaAlumnoService>();
+            services.AddSingleton<UsuarioService>();
+            // services.AddSingleton<ComprasService>();
+            // services.AddSingleton<PersonaService>();
+            // services.AddSingleton<CarreraService>();
+            // services.AddSingleton<MateriaService>();
+            // services.AddSingleton<AlumnoService>();
+            // services.AddSingleton<CalificacionService>();
+            // services.AddSingleton<ProfesorService>();
+            // services.AddSingleton<GrupoService>();
+            // services.AddSingleton<GrupoAlumnoService>();
+            // services.AddSingleton<MateriaAlumnoService>();
 
 
 
@@ -121,7 +121,7 @@ namespace reportesApi
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Plantilla",
+                    Title = "AIRBNB",
                     Description = "ASP.NET Core Web API for DataBrain reports",
                     TermsOfService = new Uri("https://example.com/terms"),
                     Contact = new Microsoft.OpenApi.Models.OpenApiContact

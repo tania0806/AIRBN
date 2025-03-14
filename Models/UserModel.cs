@@ -32,17 +32,20 @@ public class UserModel
     public int Id {get; set; }
     public string Nombre { get; set;}
     public string User { get; set;}
-    public string Perfil { get; set; }
-    public string IdPerfil {get; set;}
+    public string Email { get; set; }
+    public string MetodoAutenticacion {get; set;}
+    public string Contraseña {get; set;}
     public string Pwd { get; set; }
 }
 
 public class UsuarioModel
     {
-        public int Id { get; set; }
-        public string NombreUsuario { get; set; }
-        public string NombrePersona { get; set; }
-        public int IdSucursal { get; set; }        
-        public string NombreSucursal { get; set; }
-        public int IdPerfil { get; set; }
+       
+        public int IdUsuario { get; set; }
+        public string Nombre { get; set; }
+        public string Email { get; set; }
+        public string FotoPerfil { get; set; }        
+        public string MetodoAutenticacion { get; set; }
+        public string Contraseña { get; set; }
+        public string FechaRegistro { get; set; }
     }

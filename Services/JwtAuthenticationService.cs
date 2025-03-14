@@ -4,7 +4,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-namespace reportesApi.Services
+namespace Airbnb.Services
 {
     public class JwtAuthenticationService : IJwtAuthenticationService
     {

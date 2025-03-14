@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
-using reportesApi.Models;
+using Airbnb.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 

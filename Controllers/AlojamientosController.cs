@@ -1,9 +1,9 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
-using reportesApi.Services;
-using reportesApi.Utilities;
+using Airbnb.Services;
+using Airbnb.Utilities;
 using Microsoft.AspNetCore.Authorization;
-using reportesApi.Models;
+using Airbnb.Models;
 using Microsoft.Extensions.Logging;
 using System.Net;
 using reportesApi.Helpers;
@@ -12,17 +12,16 @@ using System.IO;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using Microsoft.AspNetCore.Hosting;
-using reportesApi.Models.Compras;
 
-namespace reportesApi.Controllers
+namespace Airbnb.Controllers
 {
    
     [Route("api")]
-    public class AlumnoController: ControllerBase
+    public class AlojamientosController: ControllerBase
     {
    
-        private readonly AlumnoService _AlumnoService;
-        private readonly ILogger<AlumnoController> _logger;
+        private readonly AlojamientosService _AlojamientosService;
+        private readonly ILogger<AlojamientosController> _logger;
   
         private readonly IJwtAuthenticationService _authService;
         private readonly IWebHostEnvironment _hostingEnvironment;
@@ -30,8 +29,8 @@ namespace reportesApi.Controllers
 
         Encrypt enc = new Encrypt();
 
-        public AlumnoController(AlumnoService AlumnoService, ILogger<AlumnoController> logger, IJwtAuthenticationService authService) {
-            _AlumnoService = AlumnoService;
+        public AlojamientosController(AlojamientosService alojamientosService, ILogger<AlojamientosController> logger, IJwtAuthenticationService authService) {
+            _AlojamientosService = alojamientosService;
             _logger = logger;
        
             _authService = authService;
@@ -43,15 +42,15 @@ namespace reportesApi.Controllers
         }
 
 
-        [HttpPost("InsertAlumno")]
-        public IActionResult InsertAlumnos([FromBody] InsertAlumnoModel req )
+        [HttpPost("InsertAlojamiento")]
+        public IActionResult InsertAlojamiento([FromBody] InsertAlojamientosModel req )
         {
             var objectResponse = Helper.GetStructResponse();
             try
             {
                 objectResponse.StatusCode = (int)HttpStatusCode.OK;
                 objectResponse.success = true;
-                objectResponse.message = _AlumnoService.InsertAlumno(req);
+                objectResponse.message = _AlojamientosService.InsertAlojamientos(req);
 
             }
 
@@ -63,20 +62,18 @@ namespace reportesApi.Controllers
             return new JsonResult(objectResponse);
         }
 
-        [HttpGet("GetAlumnos")]
-        public IActionResult GetAlumnos()
+        [HttpGet("GetAlojamiento")]
+        public IActionResult GetAlojamiento()
         {
             var objectResponse = Helper.GetStructResponse();
+            var resultado = _AlojamientosService.GetAlojamientos();
+
             try
             {
                 objectResponse.StatusCode = (int)HttpStatusCode.OK;
                 objectResponse.success = true;
                 objectResponse.message = "data cargado con exito";
-
-
-                // Llamando a la función y recibiendo los dos valores.
                 
-                 var resultado = _AlumnoService.GetAlumnos();
                  objectResponse.response = resultado;
             }
 
@@ -88,17 +85,19 @@ namespace reportesApi.Controllers
             return new JsonResult(objectResponse);
         }
 
-        [HttpPut("UpdateAlumno")]
-        public IActionResult UpdateAlumnos([FromBody] UpdateAlumnoModel req )
+    
+
+        [HttpPut("UpdateAlojamiento")]
+        public IActionResult UpdateAlojamiento([FromBody] UpdateAlojamientosModel req )
         {
             var objectResponse = Helper.GetStructResponse();
             try
             {
                 objectResponse.StatusCode = (int)HttpStatusCode.OK;
                 objectResponse.success = true;
-                objectResponse.message = _AlumnoService.UpdateAlumno(req);
+                objectResponse.message = _AlojamientosService.UpdateAlojameintos(req);
 
-                ;
+                
 
             }
 
@@ -110,8 +109,8 @@ namespace reportesApi.Controllers
             return new JsonResult(objectResponse);
         }
 
-        [HttpDelete("DeleteAlumno")]
-        public IActionResult DeleteAlumno([FromBody] int id )
+        [HttpDelete("DeleteAlojamiento/{id}")]
+        public IActionResult DeleteAlojamiento([FromRoute] int id )
         {
             var objectResponse = Helper.GetStructResponse();
             try
@@ -120,7 +119,7 @@ namespace reportesApi.Controllers
                 objectResponse.success = true;
                 objectResponse.message = "data cargado con exito";
 
-                _AlumnoService.DeleteAlumno(id);
+                _AlojamientosService.DeleteAlojamientos(id);
 
             }
 

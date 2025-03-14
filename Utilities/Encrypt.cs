@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace reportesApi.Utilities{
+namespace Airbnb.Utilities{
     public class Encrypt{
         public string GetSHA256(string str)
         {

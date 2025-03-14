@@ -1,5 +1,5 @@
 ﻿using System;
-namespace reportesApi.Models
+namespace Airbnb.Models
 {
     public class AuthInfo
     {

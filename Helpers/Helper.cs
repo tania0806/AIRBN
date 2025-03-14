@@ -1,5 +1,5 @@
 ﻿using System;
-using reportesApi.Models;
+using Airbnb.Models;
 
 namespace reportesApi.Helpers
 {

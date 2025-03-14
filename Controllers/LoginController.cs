@@ -1,13 +1,14 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
-using reportesApi.Services;
-using reportesApi.Utilities;
+using Airbnb.Services;
+using Airbnb.Utilities;
 using Microsoft.AspNetCore.Authorization;
-using reportesApi.Models;
+using Airbnb.Models;
 using Microsoft.Extensions.Logging;
 using System.Net;
 
-namespace reportesApi.Controllers
+
+namespace Airbnb.Controllers
 {
    
     [Route("api")]
@@ -43,7 +44,7 @@ namespace reportesApi.Controllers
 
          
            
-                if (loginResponse.Id != 0)
+                if (loginResponse.IdUsuario != 0)
                 {
                     result.StatusCode = (int)HttpStatusCode.OK;
                     result.Error = false;

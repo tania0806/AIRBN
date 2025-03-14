@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Net.Http;
-using reportesApi.Models;
-using reportesApi.Services;
+using Airbnb.Models;
+using Airbnb.Services;
 using Microsoft.AspNetCore.Authorization;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace reportesApi.Controllers
+namespace Airbnb.Controllers
 {
  [Route("api")]
     public class DefaultController:ControllerBase

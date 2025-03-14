@@ -1,9 +1,9 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
-using reportesApi.Services;
-using reportesApi.Utilities;
+using Airbnb.Services;
+using Airbnb.Utilities;
 using Microsoft.AspNetCore.Authorization;
-using reportesApi.Models;
+using Airbnb.Models;
 using Microsoft.Extensions.Logging;
 using System.Net;
 using reportesApi.Helpers;
@@ -12,17 +12,16 @@ using System.IO;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using Microsoft.AspNetCore.Hosting;
-using reportesApi.Models.Compras;
 
-namespace reportesApi.Controllers
+namespace Airbnb.Controllers
 {
    
     [Route("api")]
-    public class PersonaController: ControllerBase
+    public class UsuarioController: ControllerBase
     {
    
-        private readonly PersonaService _personaService;
-        private readonly ILogger<PersonaController> _logger;
+        private readonly UsuarioService _UsuarioService;
+        private readonly ILogger<UsuarioController> _logger;
   
         private readonly IJwtAuthenticationService _authService;
         private readonly IWebHostEnvironment _hostingEnvironment;
@@ -30,8 +29,8 @@ namespace reportesApi.Controllers
 
         Encrypt enc = new Encrypt();
 
-        public PersonaController(PersonaService personaService, ILogger<PersonaController> logger, IJwtAuthenticationService authService) {
-            _personaService = personaService;
+        public UsuarioController(UsuarioService UsuarioService, ILogger<UsuarioController> logger, IJwtAuthenticationService authService) {
+            _UsuarioService = UsuarioService;
             _logger = logger;
        
             _authService = authService;
@@ -43,16 +42,15 @@ namespace reportesApi.Controllers
         }
 
 
-        [HttpPost("InsertPersonas")]
-        public IActionResult InsertPersonas([FromBody] InsertPersonaModel req )
+        [HttpPost("InsertUsuario")]
+        public IActionResult InsertUsuario([FromBody] InsertUsuarioModel req )
         {
             var objectResponse = Helper.GetStructResponse();
             try
             {
                 objectResponse.StatusCode = (int)HttpStatusCode.OK;
                 objectResponse.success = true;
-                objectResponse.message = _personaService.InsertPersona(req);
-
+                objectResponse.message = _UsuarioService.InsertUsuario(req);
 
             }
 
@@ -64,20 +62,18 @@ namespace reportesApi.Controllers
             return new JsonResult(objectResponse);
         }
 
-        [HttpGet("GetPersonas")]
-        public IActionResult GetPersonas()
+        [HttpGet("GetUsuario")]
+        public IActionResult GetUsuario()
         {
             var objectResponse = Helper.GetStructResponse();
+            var resultado = _UsuarioService.GetUsuarios();
+
             try
             {
                 objectResponse.StatusCode = (int)HttpStatusCode.OK;
                 objectResponse.success = true;
                 objectResponse.message = "data cargado con exito";
-
-
-                // Llamando a la función y recibiendo los dos valores.
                 
-                 var resultado = _personaService.GetPersonas();
                  objectResponse.response = resultado;
             }
 
@@ -89,17 +85,19 @@ namespace reportesApi.Controllers
             return new JsonResult(objectResponse);
         }
 
-        [HttpPut("UpdatePersonas")]
-        public IActionResult UpdatePersonas([FromBody] UpdatePersonaModel req )
+    
+
+        [HttpPut("UpdateUsuario")]
+        public IActionResult UpdateUsuario([FromBody] UpdateUsuarioModel req )
         {
             var objectResponse = Helper.GetStructResponse();
             try
             {
                 objectResponse.StatusCode = (int)HttpStatusCode.OK;
                 objectResponse.success = true;
-                objectResponse.message =  _personaService.UpdatePersona(req);
+                objectResponse.message = _UsuarioService.UpdateUsuarios(req);
 
-               
+                
 
             }
 
@@ -111,8 +109,8 @@ namespace reportesApi.Controllers
             return new JsonResult(objectResponse);
         }
 
-        [HttpDelete("DeletePersonas")]
-        public IActionResult DeletePersonas([FromBody] int id )
+        [HttpDelete("DeleteUsuario/{id}")]
+        public IActionResult DeleteUsuario([FromRoute] int id )
         {
             var objectResponse = Helper.GetStructResponse();
             try
@@ -121,7 +119,7 @@ namespace reportesApi.Controllers
                 objectResponse.success = true;
                 objectResponse.message = "data cargado con exito";
 
-                _personaService.DeletePersona(id);
+                _UsuarioService.DeleteUsuario(id);
 
             }
 

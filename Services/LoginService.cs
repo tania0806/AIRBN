@@ -3,9 +3,9 @@ using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
 using reportesApi.DataContext;
-using reportesApi.Models;
+using Airbnb.Models;
 
-namespace reportesApi.Services
+namespace Airbnb.Services
 {
     public class LoginService
     {
@@ -32,13 +32,14 @@ namespace reportesApi.Services
                 {
                     foreach (DataRow row in ds.Tables[0].Rows)
                     {
-                        usuario.NombreUsuario = row["NombreUsuario"].ToString();
-                        usuario.NombrePersona = row["NombrePersona"].ToString();
-                        usuario.IdSucursal = int.Parse(row["IdSucursal"].ToString());
-                        usuario.NombreSucursal = row["NombreSucursal"].ToString();
-                        usuario.Id = int.Parse(row["Id"].ToString());
-                        usuario.IdPerfil = int.Parse(row["id_perfil"].ToString());
-                    
+                        usuario.Nombre = row["Nombre"].ToString();
+                        usuario.Email = row["Email"].ToString();
+                        usuario.FotoPerfil = row["FotoPerfil"].ToString();
+                        usuario.MetodoAutenticacion = row["MetodoAUtenticacion"].ToString();
+                        usuario.IdUsuario = int.Parse(row["IdUsuario"].ToString());
+                        usuario.Contraseña = row["Contraseña"].ToString();
+                        usuario.FechaRegistro = row["FechaRegistro"].ToString();
+
                     }
                 }
                 return usuario;

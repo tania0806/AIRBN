@@ -1,6 +1,6 @@
 ﻿
 using reportesApi.CustomExceptionMiddleware;
-using reportesApi.Models;
+using Airbnb.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json;
 
-namespace reportesApi.Models
+namespace Airbnb.Models
 {
     public class ErrorDetails
     {
