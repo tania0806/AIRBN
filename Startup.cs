@@ -62,8 +62,8 @@ namespace Airbnb
             // Get Services LB
             services.AddSingleton<LoginService>();
             services.AddSingleton<UsuarioService>();
-            // services.AddSingleton<ComprasService>();
-            // services.AddSingleton<PersonaService>();
+            services.AddSingleton<AlojamientosService>();
+            services.AddSingleton<AyudaService>();
             // services.AddSingleton<CarreraService>();
             // services.AddSingleton<MateriaService>();
             // services.AddSingleton<AlumnoService>();
