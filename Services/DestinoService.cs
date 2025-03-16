@@ -29,7 +29,7 @@ namespace Airbnb.Services
              
         }
 
-        public List<GetDestinoModel> GetAyuda()
+        public List<GetDestinoModel> GetDestino()
         {
             ConexionDataAccess dac = new ConexionDataAccess(connection);
             GetDestinoModel sedes = new GetDestinoModel();
@@ -38,19 +38,19 @@ namespace Airbnb.Services
             try
             {
                 parametros = new ArrayList();
-                DataSet ds = dac.Fill("sp_get_ayuda", parametros);
+                DataSet ds = dac.Fill("sp_get_destinos", parametros);
                 if (ds.Tables[0].Rows.Count > 0)
                 {
 
                   lista = ds.Tables[0].AsEnumerable()
                     .Select(dataRow => new GetDestinoModel {
                         Id = int.Parse(dataRow["Id"].ToString()),
-                        NombreCompleto = dataRow["NombreCompleto"].ToString(),
-                        CorreoElectronico = dataRow["CorreoElectronico"].ToString(),
-                        TipoConsulta = dataRow["TipoConsulta"].ToString(),
-                        DescripcionProblema = dataRow["DescripcionProblema"].ToString(),
-                        ArchivoAdjunto = dataRow["ArchivoAjunto"].ToString(),
-                        FechaSolicitud = dataRow["FechaSolicitud"].ToString(),
+                        Nombre = dataRow["Nombre"].ToString(),
+                        Descripcion = dataRow["Descripcion"].ToString(),
+                        PrecioTour = decimal.Parse(dataRow["PrecioTour"].ToString()),
+                        Ubicacion = dataRow["Ubicacion"].ToString(),
+                        Imagen = dataRow["Imagen"].ToString(),
+                       
                        
                         
                     }).ToList();
@@ -64,24 +64,24 @@ namespace Airbnb.Services
         }
 
 
-        public string InsertAyuda(InsertAyudaModel ayuda)
+        public string InsertDestino(InsertDestinoModel destino)
         {
 
             ConexionDataAccess dac = new ConexionDataAccess(connection);
             parametros = new ArrayList();
             string mensaje;
 
-            parametros.Add(new SqlParameter { ParameterName = "@NombreCompleto", SqlDbType = System.Data.SqlDbType.VarChar, Value = ayuda.NombreCompleto});
-            parametros.Add(new SqlParameter { ParameterName = "@CorreoElectronico", SqlDbType = System.Data.SqlDbType.VarChar, Value = ayuda.CorreoElectronico});
-            parametros.Add(new SqlParameter { ParameterName = "@TipoConsulta", SqlDbType = System.Data.SqlDbType.VarChar, Value = ayuda.TipoConsulta});
-            parametros.Add(new SqlParameter { ParameterName = "@DescripcionProblema", SqlDbType = System.Data.SqlDbType.VarChar, Value = ayuda.DescripcionProblema});
-            parametros.Add(new SqlParameter { ParameterName = "@ArchivoAdjunto", SqlDbType = System.Data.SqlDbType.VarChar, Value = ayuda.ArchivoAdjunto});
+            parametros.Add(new SqlParameter { ParameterName = "@Nombre", SqlDbType = System.Data.SqlDbType.VarChar, Value = destino.Nombre});
+            parametros.Add(new SqlParameter { ParameterName = "@Descripcion", SqlDbType = System.Data.SqlDbType.VarChar, Value = destino.Descripcion});
+            parametros.Add(new SqlParameter { ParameterName = "@PrecioTour", SqlDbType = System.Data.SqlDbType.Decimal, Value = destino.PrecioTour});
+            parametros.Add(new SqlParameter { ParameterName = "@Ubicacion", SqlDbType = System.Data.SqlDbType.VarChar, Value = destino.Ubicacion});
+            parametros.Add(new SqlParameter { ParameterName = "@Imagen", SqlDbType = System.Data.SqlDbType.VarChar, Value = destino.Imagen});
 
 
 
             try
             {
-                DataSet ds = dac.Fill("sp_insert_ayuda", parametros);
+                DataSet ds = dac.Fill("sp_insert_destinos", parametros);
                 mensaje = ds.Tables[0].AsEnumerable().Select(dataRow => dataRow["Mensaje"].ToString()).ToList()[0];
             }
             catch (Exception ex)
@@ -92,22 +92,22 @@ namespace Airbnb.Services
             return mensaje;
         }
 
-        public string UpdateAyuda(UpdateAyudaModel ayuda)
+        public string UpdateDestino(UpdateDestinoModel destino)
         {
             ConexionDataAccess dac = new ConexionDataAccess(connection);
             parametros = new ArrayList();
             string mensaje;
 
-            parametros.Add(new SqlParameter { ParameterName = "@Id", SqlDbType = System.Data.SqlDbType.Int, Value = ayuda.Id});
-            parametros.Add(new SqlParameter { ParameterName = "@NombreCompleto", SqlDbType = System.Data.SqlDbType.VarChar, Value = ayuda.NombreCompleto});
-            parametros.Add(new SqlParameter { ParameterName = "@CorreoElectronico", SqlDbType = System.Data.SqlDbType.VarChar, Value = ayuda.CorreoElectronico});
-            parametros.Add(new SqlParameter { ParameterName = "@TipoConsulta", SqlDbType = System.Data.SqlDbType.VarChar, Value = ayuda.TipoConsulta});
-            parametros.Add(new SqlParameter { ParameterName = "@DescripcionProblema", SqlDbType = System.Data.SqlDbType.VarChar, Value = ayuda.DescripcionProblema});
-            parametros.Add(new SqlParameter { ParameterName = "@ArchivoAdjunto", SqlDbType = System.Data.SqlDbType.VarChar, Value = ayuda.ArchivoAdjunto});
-            
+            parametros.Add(new SqlParameter { ParameterName = "@Id", SqlDbType = System.Data.SqlDbType.Int, Value = destino.Id});
+            parametros.Add(new SqlParameter { ParameterName = "@Nombre", SqlDbType = System.Data.SqlDbType.VarChar, Value = destino.Nombre});
+            parametros.Add(new SqlParameter { ParameterName = "@Descripcion", SqlDbType = System.Data.SqlDbType.VarChar, Value = destino.Descripcion});
+            parametros.Add(new SqlParameter { ParameterName = "@PrecioTour", SqlDbType = System.Data.SqlDbType.Decimal, Value = destino.PrecioTour});
+            parametros.Add(new SqlParameter { ParameterName = "@Ubicacion", SqlDbType = System.Data.SqlDbType.VarChar, Value = destino.Ubicacion});
+            parametros.Add(new SqlParameter { ParameterName = "@Imagen", SqlDbType = System.Data.SqlDbType.VarChar, Value = destino.Imagen});
+
             try
             {
-                DataSet ds = dac.Fill("sp_update_ayuda", parametros);
+                DataSet ds = dac.Fill("sp_update_destinos", parametros);
                 mensaje = ds.Tables[0].AsEnumerable().Select(dataRow => dataRow["mensaje"].ToString()).ToList()[0];
             }
             catch (Exception ex)
@@ -118,7 +118,7 @@ namespace Airbnb.Services
             return mensaje;
         }
 
-      public void DeleteAyuda(int id)
+      public void DeleteDestino(int id)
         {
             ConexionDataAccess dac = new ConexionDataAccess(connection);
             parametros = new ArrayList();
@@ -127,7 +127,7 @@ namespace Airbnb.Services
 
             try
             {
-                dac.ExecuteNonQuery("sp_delete_ayuda", parametros);
+                dac.ExecuteNonQuery("sp_delete_destinos", parametros);
             }
             catch (Exception ex)
             {

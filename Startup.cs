@@ -64,7 +64,7 @@ namespace Airbnb
             services.AddSingleton<UsuarioService>();
             services.AddSingleton<AlojamientosService>();
             services.AddSingleton<AyudaService>();
-            // services.AddSingleton<CarreraService>();
+            services.AddSingleton<DestinoService>();
             // services.AddSingleton<MateriaService>();
             // services.AddSingleton<AlumnoService>();
             // services.AddSingleton<CalificacionService>();
